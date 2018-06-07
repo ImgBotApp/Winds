@@ -406,15 +406,15 @@ async@2.1.4:
   dependencies:
     lodash "^4.14.0"
 
-async@^1.3.0, async@^1.4.0, async@^1.5.0:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
-
-async@^2.6.0, async@^2.6.1:
+async@2.6.1, async@^2.6.0, async@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
   dependencies:
     lodash "^4.17.10"
+
+async@^1.3.0, async@^1.4.0, async@^1.5.0:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -1851,9 +1851,9 @@ dotdir-regex@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/dotdir-regex/-/dotdir-regex-0.1.0.tgz#d45df4c8863be6f5593d716914381767e938c0b6"
 
-dotenv@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-5.0.1.tgz#a5317459bd3d79ab88cff6e44057a6a3fbb1fcef"
+dotenv@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.0.0.tgz#24e37c041741c5f4b25324958ebbc34bca965935"
 
 double-ended-queue@^2.1.0-0:
   version "2.1.0-0"
@@ -2198,6 +2198,10 @@ feedparser@^2.2.9:
     mri "^1.1.0"
     readable-stream "^2.2.2"
     sax "^1.2.4"
+
+file-type@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/file-type/-/file-type-8.0.0.tgz#6e4bccc741187f4113334a4e4a4ef84d54d7cc1e"
 
 filename-regex@^2.0.0:
   version "2.0.1"
@@ -4080,6 +4084,12 @@ mongodb@3.0.8:
   dependencies:
     mongodb-core "3.0.8"
 
+mongodb@3.0.9:
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.0.9.tgz#742e685e45ac9c3ead02a91c9ebaae7165bb2def"
+  dependencies:
+    mongodb-core "3.0.8"
+
 mongodb@^3.1.0-beta4:
   version "3.1.0-beta4"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.1.0-beta4.tgz#922cb05c37d04a51ea783569743ef2a893585bfe"
@@ -4139,15 +4149,15 @@ mongoose-validators@^0.1.0:
     regexp-clone "0.0.1"
     sliced "1.0.1"
 
-mongoose@^5.1.3:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.1.3.tgz#77576b117d6387fb6dd0a6db95ac41b5882dac0a"
+mongoose@^5.1.4:
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.1.4.tgz#eda83a5d81149c8114b6cac5e8b419324f92cc4b"
   dependencies:
-    async "2.1.4"
+    async "2.6.1"
     bson "~1.0.5"
     kareem "2.1.0"
     lodash.get "4.4.2"
-    mongodb "3.0.8"
+    mongodb "3.0.9"
     mongoose-legacy-pluralize "1.0.2"
     mpath "0.4.1"
     mquery "3.0.0"
@@ -4203,12 +4213,13 @@ multer@^1.3.0:
     type-is "^1.6.4"
     xtend "^4.0.0"
 
-music-metadata@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/music-metadata/-/music-metadata-1.1.0.tgz#0f08dd39115546408d01ea7cc858ace48ffeb40f"
+music-metadata@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/music-metadata/-/music-metadata-2.0.0.tgz#c46086b248956072e042c6f335f6a48c9b67a07b"
   dependencies:
     bluebird "^3.5.1"
     debug "^3.1.0"
+    file-type "^8.0.0"
     fs-extra "^6.0.1"
     strtok3 "^1.4.2"
     then-read-stream "^1.1.3"
@@ -4261,9 +4272,9 @@ nise@^1.3.3:
     path-to-regexp "^1.7.0"
     text-encoding "^0.6.4"
 
-nock@^9.3.0:
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/nock/-/nock-9.3.0.tgz#4dcfdd37bd249836754d05bbac5a1f05e12e0f16"
+nock@^9.3.1:
+  version "9.3.1"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-9.3.1.tgz#8c5c6428240d5bf337b7b72c04e63a6737183b95"
   dependencies:
     chai "^4.1.2"
     debug "^3.1.0"
@@ -5359,9 +5370,9 @@ signal-exit@^3.0.0, signal-exit@^3.0.1, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
-sinon@^5.0.10:
-  version "5.0.10"
-  resolved "https://registry.yarnpkg.com/sinon/-/sinon-5.0.10.tgz#a282b36a7475664c9f98719108e5546907129023"
+sinon@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/sinon/-/sinon-5.1.0.tgz#65f463422978638fadf750c026719697feb0dca5"
   dependencies:
     "@sinonjs/formatio" "^2.0.0"
     diff "^3.5.0"
@@ -6016,9 +6027,9 @@ validator@3.16.0:
   version "3.16.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-3.16.0.tgz#ec2c6c3a8be5f7e7085cb79e1b1681fc5bd27846"
 
-validator@^10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-10.2.0.tgz#61d6b10c3d5c9f368c75c2ce8ca2b792522eaafa"
+validator@^10.3.0:
+  version "10.3.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-10.3.0.tgz#157a8c0981858cff381f59aabcdb8f83b57317cc"
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"
