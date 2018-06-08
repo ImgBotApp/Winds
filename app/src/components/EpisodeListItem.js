@@ -13,11 +13,13 @@ class EpisodeListItem extends React.Component {
 		this.state = { addToPlaylistPopoverIsOpen: false };
 		this.toggleAddToPlaylistPopover = this.toggleAddToPlaylistPopover.bind(this);
 	}
+	
 	toggleAddToPlaylistPopover() {
 		this.setState({
 			addToPlaylistPopoverIsOpen: !this.state.addToPlaylistPopoverIsOpen,
 		});
 	}
+
 	render() {
 		let icon;
 		if (this.props.active) {

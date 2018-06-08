@@ -1,8 +1,3 @@
-import nextIcon from '../images/player/next.svg';
-import forwardIcon from '../images/player/forward.svg';
-import rewindIcon from '../images/player/rewind.svg';
-import pauseIcon from '../images/icons/pause.svg';
-import playIcon from '../images/icons/play.svg';
 import React, { Component } from 'react';
 import Img from 'react-image';
 import { Link } from 'react-router-dom';
@@ -10,10 +5,16 @@ import PropTypes from 'prop-types';
 import ReactAudioPlayer from 'react-audio-player';
 import Slider from 'rc-slider';
 import { connect } from 'react-redux';
-import fetch from '../util/fetch';
 import moment from 'moment';
-// this needs to be after `moment`
-import 'moment-duration-format'; // eslint-disable-line sort-imports
+import 'moment-duration-format';
+
+import fetch from '../util/fetch';
+
+import nextIcon from '../images/player/next.svg';
+import forwardIcon from '../images/player/forward.svg';
+import rewindIcon from '../images/player/rewind.svg';
+import pauseIcon from '../images/icons/pause.svg';
+import playIcon from '../images/icons/play.svg';
 
 class Player extends Component {
 	constructor(props) {
@@ -31,7 +32,9 @@ class Player extends Component {
 		this.seekTo = this.seekTo.bind(this);
 		this.playbackSpeedOptions = [1, 1.25, 1.5, 1.75, 2];
 		this.lastSent = 0;
-		this.handlePlayOrPauseButtonClick = this.handlePlayOrPauseButtonClick.bind(this);
+		this.togglePlayOrPause = this.togglePlayOrPause.bind(this);
+		this.incomingMediaControls = this.incomingMediaControls.bind(this);
+		this.outboundMediaControls = this.outboundMediaControls.bind(this);
 	}
 
 	componentDidMount() {
@@ -85,17 +88,26 @@ class Player extends Component {
 		}
 	}
 
-	handlePlayOrPauseButtonClick() {
+	togglePlayOrPause() {
 		if (this.props.playing) {
 			this.props.pause();
+
+			this.outboundMediaControls({
+				type: 'pause',
+			});
 		} else {
 			this.props.play();
+
+			this.outboundMediaControls({
+				type: 'play',
+			});
 		}
 	}
 
 	skipAhead() {
 		// get current position of audio
 		let currentPlaybackPosition = this.audioPlayerElement.audioEl.currentTime;
+
 		// fastseek to next position of audio
 		this.audioPlayerElement.audioEl.currentTime = currentPlaybackPosition + 30;
 		this.updateProgress(this.audioPlayerElement.audioEl.currentTime);
@@ -104,7 +116,8 @@ class Player extends Component {
 	skipBack() {
 		// get current position of audio
 		let currentPlaybackPosition = this.audioPlayerElement.audioEl.currentTime;
-		// fastseek to next position of audio
+
+		// fast seek to next position of audio
 		this.audioPlayerElement.audioEl.currentTime = currentPlaybackPosition - 30;
 		this.updateProgress(this.audioPlayerElement.audioEl.currentTime);
 	}
@@ -136,7 +149,7 @@ class Player extends Component {
 	}
 
 	updateProgress(seconds) {
-		let progress = seconds / this.audioPlayerElement.audioEl.duration * 100;
+		let progress = (seconds / this.audioPlayerElement.audioEl.duration) * 100;
 		this.setState({
 			currentTime: seconds,
 			duration: this.audioPlayerElement.audioEl.duration,
@@ -158,19 +171,35 @@ class Player extends Component {
 		});
 	}
 
+	incomingMediaControls() {
+		window.ipcRenderer.on('media-controls', (event, args) => {
+			if (args === 'togglePlayPause') {
+				this.togglePlayOrPause();
+			} else if (args === 'next') {
+				this.skipAhead();
+			} else if (args === 'previous') {
+				this.skipBack();
+			}
+		});
+	}
+
+	outboundMediaControls(args) {
+		window.ipcRenderer.send('media-controls', args);
+	}
+
 	render() {
 		if (!this.props.episode) {
 			return null;
 		}
 
 		let playButton = (
-			<div className="btn play" onClick={this.handlePlayOrPauseButtonClick}>
+			<div className="btn play" onClick={this.togglePlayOrPause}>
 				<Img src={playIcon} />
 			</div>
 		);
 
 		let pauseButton = (
-			<div className="btn pause" onClick={this.handlePlayOrPauseButtonClick}>
+			<div className="btn pause" onClick={this.togglePlayOrPause}>
 				<Img src={pauseIcon} />
 			</div>
 		);
@@ -362,4 +391,7 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(Player);

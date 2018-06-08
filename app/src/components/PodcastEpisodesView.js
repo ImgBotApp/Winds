@@ -24,12 +24,14 @@ class PodcastEpisodesView extends React.Component {
 			sortBy: 'latest',
 		};
 	}
+
 	componentDidMount() {
 		this.props.getPodcast(this.props.match.params.podcastID);
 		this.getEpisodes(this.props.match.params.podcastID);
 		getPinnedEpisodes(this.props.dispatch);
 		getFeed(this.props.dispatch, 'episode', 0, 20); // this is to populate 'recent' state indicators
 	}
+
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.match.params.podcastID !== this.props.match.params.podcastID) {
 			// essentially, if we've just switched views from one podcast to another
@@ -297,10 +299,12 @@ const mapStateToProps = (state, ownProps) => {
 	) {
 		isFollowing = true;
 	}
+
 	let podcast = null;
 	if (state.podcasts && state.podcasts[podcastID]) {
 		podcast = { ...state.podcasts[podcastID] };
 	}
+	
 	let episodes = [];
 	if (state.episodes) {
 		for (let episode of Object.keys(state.episodes)) {
@@ -309,6 +313,7 @@ const mapStateToProps = (state, ownProps) => {
 			}
 		}
 	}
+
 	for (let episode of episodes) {
 		// attach pinned state
 		if (state.pinnedEpisodes && state.pinnedEpisodes[episode._id]) {
@@ -367,7 +372,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 					type: 'podcast',
 				},
 			).catch(err => {
-				console.log(err); // eslint-disable-line no-console
 				dispatch({
 					podcastID,
 					type: 'UNFOLLOW_PODCAST',
